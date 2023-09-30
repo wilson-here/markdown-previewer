@@ -121,7 +121,7 @@ html {
       border: none;
       height: calc(100vh - 37px - 50px);
       @include bp(md) {
-        height: calc(100vh - 37px - 44px);
+        height: calc(100vh - 37px - 37px);
       }
       img {
         width: 100%;
