@@ -6,8 +6,12 @@ import CopyRight from "./components/CopyRight";
 
 function App() {
   const [text, setText] = useState(initialText);
+  const [clickedTab, setClickedTab] = useState("editor");
   const handleChange = (e) => {
     setText(e.target.value);
+  };
+  const handleClick = (e) => {
+    setClickedTab(e.target.htmlFor);
   };
   marked.setOptions({
     breaks: true,
@@ -17,27 +21,47 @@ function App() {
   return (
     <>
       <div className="tool">
-        <div className="tool__item">
-          <label className="tool__item-label" htmlFor="editor">
-            MARKDOWN
+        <div className="tool__item-label-wrap">
+          <label
+            className={`tool__item-label ${
+              clickedTab === "editor" ? "active" : ""
+            }`}
+            htmlFor="editor"
+            onClick={handleClick}
+          >
+            EDITOR
           </label>
-          <textarea
-            name="editor"
-            className="tool__item-field"
-            id="editor"
-            defaultValue={initialText}
-            onChange={handleChange}
-          ></textarea>
-        </div>
-        <div className="tool__item">
-          <label className="tool__item-label" htmlFor="preview">
+          <label
+            className={`tool__item-label ${
+              clickedTab === "preview" ? "active" : ""
+            }`}
+            htmlFor="preview"
+            onClick={handleClick}
+          >
             PREVIEW
           </label>
+        </div>
+        <div className="tool__item-field-wrap">
           <div
-            id="preview"
-            className="tool__item-field tool__item-output"
-            dangerouslySetInnerHTML={{ __html: markedText }}
-          ></div>
+            className={`tool__item ${clickedTab === "editor" ? "active" : ""}`}
+          >
+            <textarea
+              name="editor"
+              className="tool__item-field"
+              id="editor"
+              defaultValue={initialText}
+              onChange={handleChange}
+            ></textarea>
+          </div>
+          <div
+            className={`tool__item ${clickedTab === "preview" ? "active" : ""}`}
+          >
+            <div
+              id="preview"
+              className="tool__item-field"
+              dangerouslySetInnerHTML={{ __html: markedText }}
+            ></div>
+          </div>
         </div>
       </div>
       <CopyRight />
