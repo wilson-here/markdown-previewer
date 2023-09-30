@@ -103,6 +103,9 @@ button {
       overflow: scroll;
       padding: 2rem;
       border: none;
+      @include bp(md) {
+        height: 100vh;
+      }
     }
     &-output {
       font-family: "Roboto", sans-serif;
