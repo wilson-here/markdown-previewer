@@ -114,12 +114,11 @@ html {
     &-field {
       width: 100%;
       overflow: scroll;
-      padding: 2rem;
       border: none;
       height: 100%;
+      padding: 2rem 2rem 6rem;
       background-color: white;
-      @include bp(md) {
-      }
+
       blockquote {
         border-left: 3px solid #224b4b;
         color: #224b4b;
