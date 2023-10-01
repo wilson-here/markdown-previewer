@@ -37,22 +37,17 @@ button {
 .copyright {
   display: block;
   color: white;
-  margin: 0 auto;
   width: 100%;
   background-color: #339a89;
   text-align: center;
+  position: fixed;
+  bottom: 0;
 
   &__link {
     color: inherit;
     text-decoration: none;
     display: inline-block;
     padding: 1rem 0;
-    @include bp(md) {
-      padding: 0.8rem 0;
-    }
-    @include bp(sm) {
-      padding: 0.6rem 0;
-    }
   }
 }
 
@@ -76,7 +71,7 @@ html {
   }
 
   &__item-field-wrap {
-    margin-top: 37px;
+    margin-top: 3.2rem;
   }
 
   &__item {
@@ -99,19 +94,20 @@ html {
     &-label {
       background-color: #339a89;
       color: white;
-      padding: 0.5rem;
+      padding: 1rem;
       display: block;
       font-family: "Roboto", sans-serif;
       width: 50%;
+      text-align: center;
+      border-right: solid 1px black;
+      @include bp(md) {
+        cursor: pointer;
+      }
       &.active {
         @include bp(md) {
           background-color: #26695e;
+          cursor: unset;
         }
-      }
-      @include bp(md) {
-        max-width: 150px;
-        text-align: center;
-        border-right: solid 1px black;
       }
     }
     &-field {
@@ -119,17 +115,55 @@ html {
       overflow: scroll;
       padding: 2rem;
       border: none;
-      height: calc(100vh - 37px - 50px);
+      height: calc(100vh - 51px - 50px);
+      background-color: white;
       @include bp(md) {
-        height: calc(100vh - 37px - 37px);
+      }
+      blockquote {
+        border-left: 3px solid #224b4b;
+        color: #224b4b;
+        padding-left: 5px;
+        margin-left: 25px;
+      }
+      > p > code {
+        padding: 3px;
+      }
+      code {
+        background: white;
+        font-size: 0.875rem;
+        font-weight: bold;
+      }
+      pre {
+        display: block;
+        overflow: auto;
+        background: white;
+        padding: 5px;
+        line-height: 1.2;
+      }
+      h1 {
+        border-bottom: 2px solid #224b4b;
+      }
+      h2 {
+        border-bottom: 1px solid #224b4b;
+      }
+      table {
+        border-collapse: collapse;
+      }
+      td,
+      th {
+        border: 2px solid #224b4b;
+        padding-left: 5px;
+        padding-right: 5px;
       }
       img {
-        width: 100%;
+        display: block;
+        max-width: 90%;
+        margin: 2rem auto;
       }
     }
     &-output {
       font-family: "Roboto", sans-serif;
-      line-height: 1.4;
+      line-height: 1.5;
       border-left: solid black 1px;
     }
   }
