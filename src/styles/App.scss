@@ -62,9 +62,11 @@ html {
 
 .markdown-container {
   display: flex;
+  width: 100vw;
 }
 
 .tool {
+  width: 100%;
   &__item-field-wrap,
   &__item-label-wrap {
     display: flex;
