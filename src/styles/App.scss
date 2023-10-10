@@ -38,7 +38,7 @@ button {
   display: block;
   color: white;
   width: 100%;
-  background-color: #339a89;
+  background-color: rgb(221 137 0);
   text-align: center;
   position: fixed;
   bottom: 0;
@@ -54,25 +54,28 @@ button {
 // main
 html {
   overflow: hidden;
+  font-family: "Lato", sans-serif;
+  color: rgba(0, 0, 0, 0.75);
+  line-height: 1.67;
+  font-size: 80%;
 }
+
+.markdown-container {
+  display: flex;
+}
+
 .tool {
   &__item-field-wrap,
   &__item-label-wrap {
     display: flex;
   }
 
-  &__item-label-wrap {
-    position: fixed;
-    width: 100vw;
-    top: 0;
-    @include bp(md) {
-      background-color: #339a89;
-    }
-  }
-
   &__item-field-wrap {
-    padding: 3.2rem 0 3.1rem;
+    padding: 0 0 3.1rem;
     height: 100vh;
+    @include bp(md) {
+      width: 100vw;
+    }
   }
 
   &__item {
@@ -84,7 +87,30 @@ html {
     }
     &:first-child {
       font-size: 0;
-      border-right: 1px solid black;
+      border-right: 1px solid #e8e8e8;
+      display: flex;
+
+      .line-numbers {
+        flex: 0 0 auto; /* Fixed width for line numbers */
+        padding: 2rem 1rem;
+        background-color: #f3f3f3; /* Background color for line numbers */
+        border-right: 1px solid #e8e8e8; /* Vertical line separator */
+        text-align: right; /* Align line numbers to the right */
+        overflow: hidden; /* Hide the scrollbar */
+        position: relative; /* Add position:relative for absolute positioning of content */
+      }
+      .line-numbers span {
+        display: block;
+        font-size: calc(40px / 3);
+        font-family: monospace;
+      }
+      #editor {
+        line-height: inherit;
+
+        &:focus-visible {
+          outline: none;
+        }
+      }
     }
     &.active {
       @include bp(md) {
@@ -93,78 +119,185 @@ html {
     }
 
     &-label {
-      background-color: #339a89;
-      color: white;
+      color: rgb(160, 170, 191);
       padding: 1rem;
       display: block;
       font-family: "Roboto", sans-serif;
       width: 50%;
-      text-align: center;
-      border-right: solid 1px black;
+      border-right: solid 1px #e8e8e8;
+      border-bottom: solid 1px #e8e8e8;
+      font-size: 0.8rem;
+      text-transform: uppercase;
       @include bp(md) {
         cursor: pointer;
       }
+
       &.active {
         @include bp(md) {
-          background-color: #26695e;
+          background-color: #86868699;
           cursor: unset;
+          color: white;
         }
       }
+    }
+
+    #preview {
+      background-color: #f3f3f3;
     }
     &-field {
       width: 100%;
       overflow: scroll;
       border: none;
       height: 100%;
-      padding: 2rem 2rem 6rem;
-      background-color: white;
+      padding: 2rem 1rem 10rem;
+      color: inherit;
+
+      blockquote,
+      dl,
+      ol,
+      p,
+      pre,
+      ul {
+        margin: 1.2em 0;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin: 1.8em 0;
+        line-height: 1.33;
+      }
+
+      h1:after,
+      h2:after {
+        content: "";
+        display: block;
+        position: relative;
+        top: 0.33em;
+        border-bottom: 1px solid hsla(0, 0%, 50%, 0.33);
+      }
+
+      ol ol,
+      ol ul,
+      ul ol,
+      ul ul {
+        margin: 0;
+      }
+
+      dt {
+        font-weight: 700;
+      }
+
+      a {
+        color: #0c93e4;
+        text-decoration: underline;
+        text-decoration-skip: ink;
+      }
+
+      a:focus,
+      a:hover {
+        text-decoration: none;
+      }
+
+      code,
+      pre,
+      samp {
+        font-family: Roboto Mono, Lucida Sans Typewriter, Lucida Console, monaco,
+          Courrier, monospace;
+        font-size: 0.85em;
+      }
+
+      code *,
+      pre *,
+      samp * {
+        font-size: inherit;
+      }
 
       blockquote {
-        border-left: 3px solid #224b4b;
-        color: #224b4b;
-        padding-left: 5px;
-        margin-left: 25px;
+        color: rgba(0, 0, 0, 0.5);
+        padding-left: 1.5em;
+        border-left: 5px solid rgba(0, 0, 0, 0.1);
       }
-      > p > code {
-        padding: 3px;
-      }
+
       code {
-        background: white;
-        font-size: 0.875rem;
-        font-weight: bold;
+        background-color: rgba(0, 0, 0, 0.05);
+        border-radius: 3px;
+        padding: 2px 4px;
       }
-      pre {
+
+      hr {
+        border: 0;
+        border-top: 1px solid hsla(0, 0%, 50%, 0.33);
+        margin: 2em 0;
+      }
+
+      pre > code {
+        background-color: rgba(0, 0, 0, 0.05);
         display: block;
-        overflow: auto;
-        background: white;
-        padding: 5px;
-        line-height: 1.2;
+        padding: 0.5em;
+        -webkit-text-size-adjust: none;
+        overflow-x: auto;
+        white-space: pre;
       }
-      h1 {
-        border-bottom: 2px solid #224b4b;
+
+      ul {
+        list-style-type: none;
+        padding-left: 20px;
       }
-      h2 {
-        border-bottom: 1px solid #224b4b;
-      }
+
       table {
+        background-color: transparent;
         border-collapse: collapse;
+        border-spacing: 0;
       }
+
       td,
       th {
-        border: 2px solid #224b4b;
-        padding-left: 5px;
-        padding-right: 5px;
+        border-right: 1px solid #dcdcdc;
+        padding: 8px 12px;
       }
+
+      td:last-child,
+      th:last-child {
+        border-right: 0;
+      }
+
+      td {
+        border-top: 1px solid #dcdcdc;
+      }
+
+      mark {
+        background-color: #f8f840;
+      }
+
+      kbd {
+        font-family: Lato, Helvetica Neue, Helvetica, sans-serif;
+        background-color: #fff;
+        border: 1px solid rgba(63, 63, 63, 0.25);
+        border-radius: 3px;
+        box-shadow: 0 1px 0 rgba(63, 63, 63, 0.25);
+        color: #333;
+        display: inline-block;
+        font-size: 0.8em;
+        margin: 0 0.1em;
+        padding: 0.1em 0.6em;
+        white-space: nowrap;
+      }
+
+      abbr[title] {
+        border-bottom: 1px dotted #777;
+        cursor: help;
+      }
+
       img {
-        display: block;
-        max-width: 90%;
-        margin: 2rem auto;
+        max-width: 100%;
       }
     }
     &-output {
-      font-family: "Roboto", sans-serif;
-      line-height: 1.5;
-      border-left: solid black 1px;
+      border-left: solid #e8e8e8 1px;
     }
   }
 }
